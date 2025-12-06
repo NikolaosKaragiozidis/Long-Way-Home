@@ -1,7 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0cdmd24banhx"]
+[gd_scene load_steps=16 format=3 uid="uid://d0cdmd24banhx"]
 
 [ext_resource type="Texture2D" uid="uid://x0jqdmwm6g3x" path="res://images/craftpix-net-516149-city-man-pixel-art-character-sprite-sheets/City_men_1/Run.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlpux47sh4bls" path="res://scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 43.0
+height = 162.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -81,21 +85,30 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jej6c"]
-radius = 11.0
-height = 74.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+resource_local_to_scene = true
+radius = 43.0
+height = 200.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_qhqgy")
+debug_color = Color(0.882785, 0.000332295, 0.815277, 0.42)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -64)
+scale = Vector2(2.7, 2.7)
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 animation = &"run"
 autoplay = "run"
-frame = 3
 frame_progress = 0.522137
+offset = Vector2(0, -26)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -36)
-shape = SubResource("CapsuleShape2D_jej6c")
+shape = SubResource("CapsuleShape2D_g2els")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
