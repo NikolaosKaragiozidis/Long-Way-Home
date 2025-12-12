@@ -1,94 +1,39 @@
-[gd_scene load_steps=16 format=3 uid="uid://d0cdmd24banhx"]
+[gd_scene load_steps=9 format=3 uid="uid://d0cdmd24banhx"]
 
-[ext_resource type="Texture2D" uid="uid://x0jqdmwm6g3x" path="res://images/craftpix-net-516149-city-man-pixel-art-character-sprite-sheets/City_men_1/Run.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dlpux47sh4bls" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://ceoiscw3l46cq" path="res://images/animation/Sprite-0003.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://b5f3iks44er1l" path="res://images/animation/Sprite-0004.png" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://dtskaserb46tg" path="res://images/animation/Sprite-0005.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://vjao7buysjr2" path="res://images/animation/Sprite-0006.png" id="5_ur7pv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 43.0
 height = 162.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(1152, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g2els")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qhqgy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqkch")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qlg0r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tuyoq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fjrip")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_smehm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ur7pv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y4r1p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d2wvv")
-}],
-"loop": true,
-"name": &"run",
-"speed": 24.0
-}]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 resource_local_to_scene = true
 radius = 43.0
 height = 200.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qlg0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fjrip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_smehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ur7pv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
@@ -100,15 +45,14 @@ position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_qhqgy")
 debug_color = Color(0.882785, 0.000332295, 0.815277, 0.42)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2.7, 2.7)
-sprite_frames = SubResource("SpriteFrames_3v2ag")
-animation = &"run"
-autoplay = "run"
-frame_progress = 0.522137
-offset = Vector2(0, -26)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 88)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+autoplay = "default"
+frame_progress = 0.718037
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var hearts = $"../CanvasLayer/UI/HBoxContainer"
-@onready var noob = $"../CanvasLayer/UI/noob"
+
+@onready var scoreContainer = $"../CanvasLayer/UI/HBoxContainer2"
+@onready var score = $"../CanvasLayer/UI/HBoxContainer2/ScoreCounter"
 
 @export var gravity: int = 400
 @export var jumpHeight: int = 250
@@ -20,18 +22,35 @@ func _physics_process(delta: float):
 	move_and_slide()
 
 
-var counter = 0
-
 func _on_area_2d_area_entered(area) -> void:
 	var heartsArr = hearts.get_children()
-	counter += 1
+	Global.lifeCounter += 1
+				
+	if heartsArr.size() > 0 and Global.lifeCounter <= 3:
+		heartsArr[Global.lifeCounter -1].visible = false
 		
-	if heartsArr.size() > 0 and counter <= 3:
-		heartsArr[counter -1].visible = false
-		
-	if counter == 3:
+	if Global.lifeCounter == 3:
 		$CollisionShape2D.get_parent().collision_mask = 1 << 2
-		noob.visible = true
+		
+		# CENTER SCORE CONTAINER AFTER GAME ENDS
+		scoreContainer.grow_horizontal = Control.GROW_DIRECTION_BOTH
+		scoreContainer.grow_vertical = Control.GROW_DIRECTION_BOTH
+		scoreContainer.set_anchors_preset(Control.PRESET_CENTER)
+		
+		scoreContainer.offset_left = 0
+		scoreContainer.offset_top = 0
+		scoreContainer.offset_right = 0
+		scoreContainer.offset_bottom = 0
+		
+		#for child in scoreContainer.get_children():
+			#if child is Label:
+		score.add_theme_font_size_override("font_size", 70)
+	
+		##########################################
+		
+		# DELAY 3S BEFORE RELOADING SCENE
 		await get_tree().create_timer(3).timeout
 		
+		Global.lifeCounter = 0
 		get_tree().reload_current_scene()
+		
