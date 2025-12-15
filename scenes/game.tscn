@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnpfl830db2bv"]
+[gd_scene load_steps=10 format=3 uid="uid://cnpfl830db2bv"]
 
 [ext_resource type="PackedScene" uid="uid://d0cdmd24banhx" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://donj4ojfy7o13" path="res://scripts/parallax_background.gd" id="3_lbhrr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://divjxn3lo6j8a" path="res://images/heart.png" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://dhs3o8j5vqxry" path="res://scenes/main_scene.tscn" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://bqmd5pvw4ndam" path="res://scripts/score_counter.gd" id="6_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://b1jvlvtchww4v" path="res://sfx/Checkpoint sound.wav" id="7_gee14"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
 size = Vector2(3190, 40)
@@ -21,6 +22,9 @@ collision_layer = 3
 collision_mask = 3
 gravity = 1000
 jumpHeight = 570
+
+[node name="Timer" type="Timer" parent="Player"]
+autostart = true
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 334)
@@ -104,6 +108,12 @@ theme_override_font_sizes/font_size = 34
 text = "0"
 script = ExtResource("6_u5sy4")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/UI/HBoxContainer2/ScoreCounter"]
+stream = ExtResource("7_gee14")
+volume_db = -20.079
+
 [node name="MainScene" parent="." instance=ExtResource("6_p57ef")]
 visible = false
 position = Vector2(-604, -314)
+
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]

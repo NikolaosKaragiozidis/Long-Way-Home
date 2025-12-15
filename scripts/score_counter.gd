@@ -10,6 +10,10 @@ func _process(delta: float) -> void:
 		Global.score += 10
 		self.text = str(Global.score)
 		time_passed = 0.0
+		
+		if Global.score == 300:
+			$AudioStreamPlayer.play(0.0)
+			
 	
 	if Global.lifeCounter == 3:
 		set_process(false)

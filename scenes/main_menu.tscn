@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2udfsh01utm1"]
+
+[ext_resource type="Script" uid="uid://dwt854bjatuyo" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://bf8bqq5j3tcji" path="res://images/craftpix-891123-free-pixel-art-street-2d-backgrounds/PNG/City3/Bright/City3.png" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://ceoiscw3l46cq" path="res://images/animation/Sprite-0003.png" id="3_bqqt6"]
+[ext_resource type="AudioStream" uid="uid://dgsiqbpt2mdxp" path="res://music/long_way_home_gameplay_main_menu.mp3" id="4_wu84c"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="CanvasLayer" parent="."]
+script = ExtResource("1_l6cm7")
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+modulate = Color(0.489622, 0.489622, 0.489622, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ekxnf")
+
+[node name="TextureRect2" type="TextureRect" parent="Menu"]
+modulate = Color(0.489622, 0.489622, 0.489622, 1)
+offset_left = -1401.0
+offset_top = 177.0
+offset_right = 1787.0
+offset_bottom = 811.0
+texture = ExtResource("3_bqqt6")
+
+[node name="MenuPanel" type="Panel" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu/MenuPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Long way home..."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Menu/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Menu/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="Options" type="Button" parent="Menu/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="Credits" type="Button" parent="Menu/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Menu/MenuPanel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wu84c")
+autoplay = true
+
+[connection signal="pressed" from="Menu/MenuPanel/VBoxContainer/Play" to="Menu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/MenuPanel/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/MenuPanel/VBoxContainer/Credits" to="Menu" method="_on_credits_pressed"]
+[connection signal="pressed" from="Menu/MenuPanel/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]

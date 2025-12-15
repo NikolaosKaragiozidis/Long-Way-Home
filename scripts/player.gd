@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var timer: Timer = $Timer
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
@@ -28,6 +30,7 @@ func _on_area_2d_area_entered(area) -> void:
 				
 	if heartsArr.size() > 0 and Global.lifeCounter <= 3:
 		heartsArr[Global.lifeCounter -1].visible = false
+		flicker_when_damaged()
 		
 	if Global.lifeCounter == 3:
 		$CollisionShape2D.get_parent().collision_mask = 1 << 2
@@ -54,3 +57,11 @@ func _on_area_2d_area_entered(area) -> void:
 		Global.lifeCounter = 0
 		get_tree().reload_current_scene()
 		
+
+func flicker_when_damaged():
+	for i in range(4):
+		modulate.a = 0.5
+		await get_tree().create_timer(0.1).timeout
+		
+		modulate.a = 1
+		await get_tree().create_timer(0.1).timeout

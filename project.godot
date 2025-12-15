@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Long Way Home"
-run/main_scene="uid://cnpfl830db2bv"
+run/main_scene="uid://d2udfsh01utm1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
